@@ -4,6 +4,13 @@ set -e
 echo "Entrypoint script starting..."
 echo "Current user: $(whoami) (UID: $(id -u))"
 
+# Set up OpenClaw config directory
+mkdir -p /tmp/.openclaw
+if [ -f "/app/openclaw.railway.json" ]; then
+    cp /app/openclaw.railway.json /tmp/.openclaw/openclaw.json
+    echo "Copied Railway config to /tmp/.openclaw/openclaw.json"
+fi
+
 # Fix volume permissions if running as root and /data exists
 if [ "$(id -u)" = "0" ]; then
     echo "Running as root, fixing permissions..."
