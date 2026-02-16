@@ -9,7 +9,7 @@ if [ "$(id -u)" = "0" ] && [ -d "/data" ]; then
     chown -R node:node /data/.openclaw /data/workspace || true
 
     # Switch to node user and execute the command
-    exec su-exec node "$@"
+    exec gosu node "$@"
 else
     # Already running as node user or /data doesn't exist
     exec "$@"
