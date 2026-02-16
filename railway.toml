@@ -3,6 +3,6 @@ builder = "dockerfile"
 dockerfilePath = "Dockerfile"
 
 [deploy]
-startCommand = "node openclaw.mjs gateway --allow-unconfigured --bind lan --port 18789"
+startCommand = "/usr/local/bin/docker-entrypoint.sh node openclaw.mjs gateway --allow-unconfigured --bind lan --port 18789"
 restartPolicyType = "on_failure"
 restartPolicyMaxRetries = 3
