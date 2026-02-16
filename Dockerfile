@@ -32,6 +32,9 @@ ENV NODE_ENV=production
 # Allow non-root user to write temp files during runtime/tests.
 RUN chown -R node:node /app
 
+# Copy Railway config file
+COPY openclaw.railway.json /app/openclaw.railway.json
+
 # Copy and set up entrypoint script for Railway volume permissions
 COPY docker-entrypoint.sh /usr/local/bin/
 RUN chmod +x /usr/local/bin/docker-entrypoint.sh
