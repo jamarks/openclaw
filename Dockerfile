@@ -51,9 +51,14 @@ RUN pnpm ui:build
 
 ENV NODE_ENV=production
 
+# Install Himalaya email CLI (for agent email capabilities)
+USER root
+RUN ARCH=$(uname -m) && \
+    curl -fsSL "https://github.com/pimalaya/himalaya/releases/download/v1.2.0/himalaya.${ARCH}-linux.tgz" \
+    | tar xz -C /usr/local/bin/ && \
+    chmod +x /usr/local/bin/himalaya
+
 # Security hardening: Run as non-root user
-# The node:22-bookworm image includes a 'node' user (uid 1000)
-# This reduces the attack surface by preventing container escape via root privileges
 USER node
 
 # Start gateway server with default config.
